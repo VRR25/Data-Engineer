@@ -1,0 +1,27 @@
+--------------------------------------------------------------------
+SQL Query : Employee Manager Hierarchy:
+--------------------------------------------------------------------
+create table Emp(
+    Employee_id int(5) PRIMARY KEY,
+    Employee_name varchar(10) NOT NULL,
+    Manager_id int(5);
+
+
+INSERT INTO EMP(EMPLOYEE_ID,EMPLOYEE_NAME,MANAGER_ID)
+     VALUES (1, 'DHONI', 1),
+     (3, 'GANESH', 3),
+     (2, 'HARI', 1),
+     (4, 'NANI', 2),
+     (7, 'MAXWELL', 4),
+     (8, 'HYMA', 3),
+     (9, 'MUKESH', 8),
+     (77, 'KUSHI', 1);
+
+
+SELECT DISTINCT e1.manager_id, e1.employee_id
+FROM Emp e1
+JOIN Emp e2 ON e1.manager_id = e2.employee_id
+JOIN Emp e3 ON e2.manager_id = e3.employee_id
+JOIN Emp e4 ON e3.manager_id = e4.employee_id
+WHERE e1.employee_id <> 1
+AND (e1.manager_id = 1 OR e2.manager_id = 1 OR e3.manager_id = 1 OR e4.manager_id = 1);
